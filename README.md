@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-- Add the code similar to the above in a initializer file (e.g. initializers/gdpr.rb) to specify the fields you want to retrieve:
+- Add code similar to the above in a initializer file (e.g. initializers/gdpr.rb) to specify the fields you want to retrieve:
 
 ```ruby
 require 'exts/gdpr'
