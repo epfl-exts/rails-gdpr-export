@@ -26,7 +26,7 @@ Or install it yourself as:
 require 'exts/gdpr'
 
 # Loads the Gdpr module into activerecord classes.
-ActiveRecord::Base.send :include, Gdpr
+ActiveRecord::Base.send :include, Exts::Gdpr
 
 
 # Defines gdpr data collection throughout the model classes
@@ -51,7 +51,7 @@ Subscription.gdpr_collect  :stripe_id, :stripe_plan_id,
                             renamed_fields: {title: "program title"}}
 ```
 
-- call Gdpr.export(<user_id>) and it will return a csv formatted output
+- call Exts::Gdpr.export(<user_id>) and it will return a csv formatted output
 
 ## Development
 
