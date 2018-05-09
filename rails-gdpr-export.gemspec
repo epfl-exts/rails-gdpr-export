@@ -1,7 +1,7 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "rails/gdpr/export/version"
+require "exts/gdpr/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "rails-gdpr-export"
