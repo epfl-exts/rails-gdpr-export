@@ -25,7 +25,7 @@ Or install it yourself as:
 - Add the following code in a initializer file (e.g. initializers/gdpr.rb):
 
 ```ruby
-require 'gdpr'
+require 'exts/gdpr'
 
 # Loads the Gdpr module into activerecord classes.
 ActiveRecord::Base.send :include, Gdpr
