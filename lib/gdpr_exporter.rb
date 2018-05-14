@@ -76,9 +76,12 @@ module GdprExporter
       self.class.send :attr_reader, :gdpr_hash_params
 
       # Build the csv header and prepare the fields used for querying
+      #
       user_id_field = hash_params[:user_id]
-      csv_headers = [:user_id].concat @gdpr_simple_fields
-      query_fields = [user_id_field].concat @gdpr_simple_fields
+      # csv_headers = [:user_id].concat @gdpr_simple_fields # Uncomment if user_id needed
+      # query_fields = [user_id_field].concat @gdpr_simple_fields # Uncomment if user_id needed
+      csv_headers = [].concat @gdpr_simple_fields
+      query_fields = [].concat @gdpr_simple_fields
 
       if hash_params[:renamed_fields]
         csv_headers.concat hash_params[:renamed_fields].values
