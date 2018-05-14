@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails-gdpr-export (0.1.1)
+    rails-gdpr-export (1.0.0)
 
 GEM
   remote: https://rubygems.org/
