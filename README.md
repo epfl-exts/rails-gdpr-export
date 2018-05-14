@@ -36,7 +36,8 @@ In order to specify the fields that you want to return to the user you need to c
 The call target is a rails model and its arguments are as follows:
 * set of simple fields: i.e. fields that will be output as is
 * a hash of params:
- {renamed_fields: {<field_from_db> => <field_name_in_output>}
+ {user_id:        <the field in the model used as alias for the user id>
+  renamed_fields: {<field_from_db> => <field_name_in_output>}
   table_name:     <the new table name in output>
   description:    <a comment>
   join:           <an association>}
