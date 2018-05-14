@@ -54,8 +54,6 @@ User.gdpr_collect :email, :last_sign_in_at, :stripe_customer_id,
                                     last_sign_in_ip: "previously used IP address"}}
 ```
 
-```
-
 ### Data export
 Call `ruby GdprExporter.export(<user_id>)` and it will return a csv formatted output.
 
