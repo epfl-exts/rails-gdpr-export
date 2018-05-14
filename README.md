@@ -58,10 +58,10 @@ User.gdpr_collect :email, :last_sign_in_at,
 ```
 
 From your `User` model, you want to retrieve the values of the fields `email, last_sign_in_at,
-type, forward_mailbox`, in addition to the fields `sign_in_count, current_sign_in_at, chosen_program_id, current_sign_in_ip, last_sign_in_ip`. however for the latter you want their csv header to be renamed. Finally, the field representing the user in the `User` model is `id`.
+type, forward_mailbox`, in addition to the fields `sign_in_count, current_sign_in_at, chosen_program_id, current_sign_in_ip, last_sign_in_ip`. However for the latter you want their csv header to be renamed. As for the field representing the user in the `User` model, it is called `id`.
 
 ### Data export
-Finally, call `GdprExporter.export(<user_id>)` and it will return a csv formatted output of all the fields you specified previously.
+Finally, call `GdprExporter.export(<user_id>)` to return a csv formatted output of all the fields you specified previously.
 
 
 ## Contributing
