@@ -61,7 +61,7 @@ From your `User` model, you want to retrieve the values of the fields `email, la
 type, forward_mailbox`, in addition to the fields `sign_in_count, current_sign_in_at, chosen_program_id, current_sign_in_ip, last_sign_in_ip`. however for the latter you want their csv header to be renamed. Finally, the field representing the user in the `User` model is `id`.
 
 ### Data export
-Finally, call `GdprExporter.export(<user_id>)` and it will return a csv formatted output.
+Finally, call `GdprExporter.export(<user_id>)` and it will return a csv formatted output of all the fields you specified previously.
 
 
 ## Contributing
