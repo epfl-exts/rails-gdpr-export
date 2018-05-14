@@ -20,17 +20,29 @@ Or install it yourself as:
 
 ## Usage
 
-- Add code similar to the above in a initializer file (e.g. initializers/gdpr.rb) to specify the fields you want to retrieve:
+This gem allows you to specify fields that you want to retrieve from your models and to export them in a csv format.
+
+### Initialization
+
+To initialize the gem usage, loads the GdprExporter module into activerecord classes.
 
 ```ruby
-require 'exts/gdpr'
+ActiveRecord::Base.send :include, GdprExporter
+```
 
-# Loads the Gdpr module into activerecord classes.
-ActiveRecord::Base.send :include, Exts::Gdpr
+### Data collection
+
+In order to specify the fields that you want to return to the user you need to call `ruby gdpr_collect`.
+The call target is a model and it expects the following arguments:
+* set of simple fields: i.e. fields that will be output as is
+* a hash of params:
+ {renamed_fields: {<field_from_db> => <field_name_in_output>}
+  table_name:     <the new table name in output>
+  description:    <a comment>
+  join:           <an association>}
 
 
-# Defines gdpr data collection throughout the model classes
-#
+```ruby
 User.gdpr_collect :email, :last_sign_in_at, :stripe_customer_id,
                   :type, :forward_mailbox,
                   {user_id: :id,
@@ -39,25 +51,13 @@ User.gdpr_collect :email, :last_sign_in_at, :stripe_customer_id,
                                     chosen_program_id: "chosen program",
                                     current_sign_in_ip: "current IP address",
                                     last_sign_in_ip: "previously used IP address"}}
-
-
-Subscription.gdpr_collect  :stripe_id, :stripe_plan_id,
-                           :exmatriculated_at, :current_period_end, :status,
-                           :notified_at, :pause_reason, :pause_error,
-                           :start_at, :initial_start_at, :completed_at,
-                           :amount, :paused_at, :rules_accepted_at,
-                           {user_id: :user_id,
-                            join: :program,
-                            renamed_fields: {title: "program title"}}
 ```
 
-- call Exts::Gdpr.export(<user_id>) and it will return a csv formatted output
+```
 
-## Development
+### Data export
+Call `ruby GdprExporter.export(<user_id>)` and it will return a csv formatted output.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
