@@ -47,7 +47,7 @@ The call target is a rails model and its arguments are:
 #### Example
 
 ```ruby
-User.gdpr_collect :email, :last_sign_in_at, :stripe_customer_id,
+User.gdpr_collect :email, :last_sign_in_at,
                   :type, :forward_mailbox,
                   {user_id: :id,
                    renamed_fields: {sign_in_count: "sign in count",
@@ -56,6 +56,9 @@ User.gdpr_collect :email, :last_sign_in_at, :stripe_customer_id,
                                     current_sign_in_ip: "current IP address",
                                     last_sign_in_ip: "previously used IP address"}}
 ```
+
+From your `User` model, you want to retrieve the values of the fields `email, last_sign_in_at,
+type, forward_mailbox` as well as the fields `sign_in_count, current_sign_in_at, chosen_program_id, current_sign_in_ip, last_sign_in_ip`. But for the latter the csv header will be renamed. Also, the field representing the user in the `User` model is `id`.
 
 ### Data export
 Finally, call `GdprExporter.export(<user_id>)` and it will return a csv formatted output.
