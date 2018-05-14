@@ -32,16 +32,19 @@ ActiveRecord::Base.send :include, GdprExporter
 
 ### Data collection
 
-In order to specify the fields that you want to return to the user you need to call `ruby gdpr_collect`.
-The call target is a rails model and its arguments are as follows:
-* set of simple fields: i.e. fields that will be output as is
+In order to specify the fields that you want to return to the user you need to call `{ruby} gdpr_collect`.
+The call target is a rails model and its arguments are:
+* a set of simple fields: i.e. fields that will be output as is
 * a hash of params:
+```ruby
  {user_id:        <the field in the model used as alias for the user id>
   renamed_fields: {<field_from_db> => <field_name_in_output>}
   table_name:     <the new table name in output>
   description:    <a comment>
   join:           <an association>}
+```
 
+#### Example
 
 ```ruby
 User.gdpr_collect :email, :last_sign_in_at, :stripe_customer_id,
@@ -55,7 +58,7 @@ User.gdpr_collect :email, :last_sign_in_at, :stripe_customer_id,
 ```
 
 ### Data export
-Call `ruby GdprExporter.export(<user_id>)` and it will return a csv formatted output.
+Call `GdprExporter.export(<user_id>)` and it will return a csv formatted output.
 
 
 ## Contributing
