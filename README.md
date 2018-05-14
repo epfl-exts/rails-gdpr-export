@@ -34,7 +34,7 @@ ActiveRecord::Base.send :include, GdprExporter
 
 In order to specify the fields you want to return to the user you need to call `gdpr_collect`.
 The call target is a rails model and its arguments are:
-* a set of simple fields, i.e. fields that will be output as is
+* a set of simple fields, i.e. fields that will be output as is,
 * followed by a hash of params:
 ```ruby
  {user_id:        <the field in the model used as alias for the user_id field>
@@ -58,7 +58,7 @@ User.gdpr_collect :email, :last_sign_in_at, :stripe_customer_id,
 ```
 
 ### Data export
-Call `GdprExporter.export(<user_id>)` and it will return a csv formatted output.
+Finally, call `GdprExporter.export(<user_id>)` and it will return a csv formatted output.
 
 
 ## Contributing
