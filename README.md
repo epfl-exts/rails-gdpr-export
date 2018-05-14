@@ -24,7 +24,7 @@ This gem allows you to specify fields that you want to retrieve from your models
 
 ### Initialization
 
-To initialize the gem usage, loads the GdprExporter module into activerecord classes.
+To initialize the gem usage, loads the GdprExporter module into activerecord classes. Do this at initialization time through an initializer. E.g. create a initializers/gdpr.rb file and add the following:
 
 ```ruby
 ActiveRecord::Base.send :include, GdprExporter
@@ -33,7 +33,7 @@ ActiveRecord::Base.send :include, GdprExporter
 ### Data collection
 
 In order to specify the fields that you want to return to the user you need to call `ruby gdpr_collect`.
-The call target is a model and it expects the following arguments:
+The call target is a rails model and its arguments are as follows:
 * set of simple fields: i.e. fields that will be output as is
 * a hash of params:
  {renamed_fields: {<field_from_db> => <field_name_in_output>}
