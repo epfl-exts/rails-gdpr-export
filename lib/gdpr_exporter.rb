@@ -101,6 +101,8 @@ module GdprExporter
 
       # Adds a method to export to csv to the eigenclass.
       self.define_singleton_method(:gdpr_export) do |rows, csv|
+        return unless !rows.empty?
+
         csv << (hash_params[:table_name] ? [hash_params[:table_name]] :
                   [self.to_s])
         csv << csv_headers
