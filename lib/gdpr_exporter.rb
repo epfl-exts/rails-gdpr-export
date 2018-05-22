@@ -91,9 +91,13 @@ module GdprExporter
       # Adds the class method 'gdpr_query' to the eigenclass.
       # It will execute the query.
       self.define_singleton_method(:gdpr_query) do |_user_id|
-        if hash_params[:join]
-          self.select(query_fields).where(user_id_field => _user_id).
-            joins(hash_params[:join])
+        assocs_to_join = hash_params[:joins]
+        if assocs_to_join
+          assocs_to_join.inject(
+            self.select(query_fields).
+              where(user_id_field => _user_id)) do | query, assoc |
+            query.send(:joins, assoc)
+          end
         else
           self.select(query_fields).where(user_id_field => _user_id)
         end
