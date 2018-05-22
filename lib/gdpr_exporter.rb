@@ -105,11 +105,15 @@ module GdprExporter
 
         csv << (hash_params[:table_name] ? [hash_params[:table_name]] :
                   [self.to_s])
+
+        if hash_params[:desc]
+          csv << ['Description:', hash_params[:desc]]
+        end
+
         csv << csv_headers
         rows.each do |r|
           csv << query_fields.map{ |f| r.send(f) }
         end
-        csv << ['Comment:', hash_params[:desc]] if hash_params[:desc]
         csv << []
       end
     end
