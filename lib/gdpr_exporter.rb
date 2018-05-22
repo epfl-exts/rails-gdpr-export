@@ -18,7 +18,7 @@ module GdprExporter
   # Collects data through all the tagged models and generates a csv
   # formatted output
   def self.export(user_id)
-    CSV.generate do |csv|
+    CSV.generate(force_quotes: true) do |csv|
       get_klasses.each do |klass|
         rows = klass.gdpr_query(user_id)
         klass.gdpr_export(rows, csv)
