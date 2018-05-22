@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Chrislain Razafimahefa"]
   spec.email         = ["razafima@gmail.com"]
 
-  spec.summary       = %q{A gem to export personal data in compliance with GDPR.}
+  spec.summary       = %q{A rails gem to export personal data in compliance with GDPR.}
   spec.homepage      = "https://github.com/epfl-exts/rails-gdpr-export"
   spec.license       = "MIT"
 
