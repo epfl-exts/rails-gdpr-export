@@ -91,16 +91,17 @@ module GdprExporter
       # Adds the class method 'gdpr_query' to the eigenclass.
       # It will execute the query.
       self.define_singleton_method(:gdpr_query) do |_user_id|
-        assocs_to_join = hash_params[:joins]
-        if assocs_to_join
-          assocs_to_join.inject(
-            self.select(query_fields).
-              where(user_id_field => _user_id)) do | query, assoc |
+        result = self.where(user_id_field => _user_id)
+
+        # When there are multiple joins defined, just keep calling 'joins'
+        # for each association.
+        if hash_params[:joins]
+          result = hash_params[:joins].inject(result) do | query, assoc |
             query.send(:joins, assoc)
           end
-        else
-          self.select(query_fields).where(user_id_field => _user_id)
         end
+
+        result
       end
 
       # Adds a method to export to csv to the eigenclass.
@@ -116,7 +117,18 @@ module GdprExporter
 
         csv << csv_headers
         rows.each do |r|
-          csv << query_fields.map{ |f| r.send(f) }
+          csv << query_fields.map do |f|
+            f_splitted = f.to_s.split(' ')
+            if (f_splitted.size == 2)
+              # field f is coming from an assoc, i.e. field has been defined
+              # as "<tablename> <field>" in gdpr_collect then to get its value
+              # do r.<tablename>.<field>
+              f_splitted.inject(r) { |result, method| result.send(method) }
+            else
+              # No association involved, simply retrieve the field value.
+              r.send(f)
+            end
+          end
         end
         csv << []
       end
