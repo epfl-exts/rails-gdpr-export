@@ -57,11 +57,11 @@ module GdprExporter
       end
 
       unless hash_params.class == Hash
-        raise "Gdpr fields collection error: last argument must be a hash!"
+        raise ArgumentError.new("Gdpr fields collection error: last argument must be a hash!")
       end
 
       unless hash_params.key?(:user_id)
-        raise "Gdpr fields collection error: the field aliasing user_id is not declared for '#{self}'!"
+        raise ArgumentError.new("Gdpr fields collection error: the field aliasing user_id is not declared for '#{self}'!")
       end
 
       # Adds the eigen class to the set of classes eligible for gdpr data collection.
@@ -124,6 +124,8 @@ module GdprExporter
               # as "<tablename> <field>" in gdpr_collect then to get its value
               # do r.<tablename>.<field>
               f_splitted.inject(r) { |result, method| result.send(method) }
+            elsif (f_splitted.size > 2)
+              raise ArgumentError.new("Field #{f} is made of more than 2 words!?")
             else
               # No association involved, simply retrieve the field value.
               r.send(f)
