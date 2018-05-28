@@ -5,7 +5,7 @@ require 'csv'
 
 module GdprExporter
     # Stores all the classes that have been tagged for gdpr collection
-  @@klasses = []
+  @@klasses = Set[]
 
   def self.get_klasses
     @@klasses
