@@ -64,7 +64,7 @@ class User
 end
 ```
 
-From your `User` model, you want to retrieve the values of the fields `email, last_sign_in_at,
+Here from your `User` model, you want to retrieve the values of the fields `email, last_sign_in_at,
 type, forward_mailbox`, in addition to the fields `sign_in_count, current_sign_in_at, chosen_program_id, current_sign_in_ip, last_sign_in_ip`. However for the latter you want their csv header to be renamed. And the field representing the user in the `User` model is `id`.
 `User` has also an association with `program` and you want to value of its field `title` (hence the presence of `"program title"` in the list of fields).
 
