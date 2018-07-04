@@ -59,7 +59,7 @@ class User
                             current_sign_in_at: "time of current sign in",
                             chosen_program_id: "chosen program",
                             current_sign_in_ip: "current IP address",
-                            last_sign_in_ip: "previously used IP address"},
+                            last_sign_in_ip: "previously used IP address" },
           joins:          [:program] }
 end
 ```
