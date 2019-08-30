@@ -91,7 +91,19 @@ module GdprExporter
       # Adds the class method 'gdpr_query' to the eigenclass.
       # It will execute the query.
       self.define_singleton_method(:gdpr_query) do |_user_id|
-        result = self.where(user_id_field => _user_id)
+        decomposed_user_id_field = user_id_field.to_s.split(" ")
+        result = case
+                 when decomposed_user_id_field.size == 3
+                   self
+                     .includes(decomposed_user_id_field.first.to_sym => decomposed_user_id_field.second.to_sym)
+                     .where(decomposed_user_id_field.second.pluralize.to_sym => { decomposed_user_id_field.last.to_sym => _user_id })
+                 when decomposed_user_id_field.size == 2
+                   self
+                     .includes(decomposed_user_id_field.first.to_sym)
+                     .where(decomposed_user_id_field.first.pluralize.to_sym => { decomposed_user_id_field.last.to_sym => _user_id })
+                 else
+                   self.where(user_id_field => _user_id)
+                 end
 
         # When there are multiple joins defined, just keep calling 'joins'
         # for each association.
