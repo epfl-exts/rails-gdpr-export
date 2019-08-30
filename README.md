@@ -43,6 +43,8 @@ The call target is a rails model and its arguments are:
 
 When `joins` is specified, the fields of an association should be defined as `<association_name> <field_name>`.
 
+For `user_id`, you can also use a string with a chain of associations. For instance, if my model is indirectly linked to user through an `belongs_to: :account` association, you can specify `user_id: "account user_id"`. Currently, the gem support only to levels of nested associations.
+
 #### Example
 
 Suppose you have a `User` model, then in its class you should `include Gdprexporter` and call `gdpr_collect`.
