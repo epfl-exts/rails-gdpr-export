@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require "gdpr_exporter/version"
-require 'csv'
+require "csv"
+require "set"
 
 module GdprExporter
     # Stores all the classes that have been tagged for gdpr collection
